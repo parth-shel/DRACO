@@ -20,11 +20,13 @@ class Pixel {
 	int y;
 	
 	public:
+	//parameterized constructor:
 	Pixel(int x, int y) {
 		this->x = x;
 		this->y = y;
 	}
-
+	
+	//getters:
 	int getX() {
 		return x;
 	}
@@ -35,6 +37,14 @@ class Pixel {
 	//operator== overloading
 	bool operator==(Pixel& that)const {
 		return(this->x == that.x && this->y == that.y);
+	}
+	
+	//operator< overloading
+	bool operator<(Pixel& that) const {
+		if(this->x == that.x)
+			return (this->y < that.y);
+		else 
+			return(this->x < that.x);
 	}
 };
 
@@ -55,6 +65,7 @@ void writeCompressedFile(FILE * fp) {
 	printf("Num. of pixels on outline: %d\nColor of block: %d\n",
 		num_of_pixels_on_outline, blockColor);
 
+	std::sort(border.begin(), border.end());
 	border.erase(std::unique(border.begin(), border.end()), border.end());
 	std::vector <Pixel> :: iterator itr;
 	for(itr = border.begin(); itr != border.end(); ++itr) {
