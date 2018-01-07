@@ -139,6 +139,7 @@ void carveOutline(Pixel thisPixel) {
 	int x = thisPixel.getX();
 	int y = thisPixel.getY();
 	
+	//basis case:
 	if(colorOf(thisPixel) == blockColor) {
 		visited[x][y] = true; //memoize
 	}
