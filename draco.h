@@ -141,10 +141,7 @@ void carveOutline(Pixel thisPixel) {
 		visited[x][y] = true; //memoize
 	
 	if(liesOnBorder(thisPixel) && colorOf(thisPixel) == blockColor) {
-		//if(setOfPixels.find(thisPixel) == setOfPixels.end()) {
-			border.push_back(thisPixel);
-			//setOfPixels.insert(thisPixel);
-		//}
+		border.push_back(thisPixel);
 		//return;
 	}
 	
@@ -173,7 +170,7 @@ void compress(char * inputFile, char * outputFile) {
 		return;
 	readUnCompressedFile(in);
 	fclose(in);
-	FILE * redundant = fopen(outputFile, "w+");
+	FILE * redundant = fopen(outputFile, "w");
 	fclose(redundant);
 	
 	for(int i = 0;i < IMAGE_WIDTH;i++) {
@@ -181,7 +178,7 @@ void compress(char * inputFile, char * outputFile) {
 			if(!visited[i][j]) {
 				blockColor = bitmap[i][j];
 				carveOutline(Pixel(i, j));
-				FILE * out = fopen(outputFile, "w+");
+				FILE * out = fopen(outputFile, "a");
 				writeCompressedFile(out);
 				fclose(out);
 				border.clear();
@@ -216,7 +213,7 @@ void decompress(char * inputFile, char * outputFile) {
 	FILE * in = fopen(inputFile, "r");
 	if(in == NULL)
 		return;
-	FILE * redundant = fopen(outputFile, "w+");
+	FILE * redundant = fopen(outputFile, "w");
 	fclose(redundant);
 
 	parse(in, outputFile);
