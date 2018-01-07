@@ -55,6 +55,12 @@ void writeCompressedFile(FILE * fp) {
 	}
 }
 
+int colorOf(Pixel p) {
+	int x = p.getX();
+	int y = p.getY();
+	return bitmap[x][y];
+}
+
 bool isValidPixel(Pixel p) {
 	int x = p.getX();
 	int y = p.getY();
@@ -123,16 +129,16 @@ void carveOutline(Pixel thisPixel) {
 	Pixel up = Pixel(x, y-1);
 	Pixel down  = Pixel(x, y+1);
 
-	if(!isVisitedPixel(left))
+	if(!isVisitedPixel(left) && colorOf(left) == blockColor)
 		carveOutline(left);
 	
-	if(!isVisitedPixel(right))
+	if(!isVisitedPixel(right) && colorOf(right) == blockColor)
 		carveOutline(right);
 	
-	if(!isVisitedPixel(up))
+	if(!isVisitedPixel(up) && colorOf(up) == blockColor)
 		carveOutline(up);
 	
-	if(!isVisitedPixel(down));
+	if(!isVisitedPixel(down) && colorOf(down) == blockColor);
 		carveOutline(down);
 }
 
