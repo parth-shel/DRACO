@@ -124,7 +124,8 @@ void carveOutline(Pixel thisPixel) {
 		return;
 	int x = thisPixel.getX();
 	int y = thisPixel.getY();
-	visited[x][y] = true; //memoize
+	if(bitmap[x][y] == blockColor)
+		visited[x][y] = true; //memoize
 	if(liesOnBorder(thisPixel)) {
 		//if(setOfPixels.find(thisPixel) == setOfPixels.end()) {
 			border.push_back(thisPixel);
