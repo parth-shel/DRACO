@@ -38,6 +38,10 @@ class Pixel {
 	}
 };
 
+bool uniqueCompare(Pixel& l, Pixel& r) {
+	return(l.getX() == r.getX() && l.getY() == r.getY());
+}
+
 std::vector<Pixel> border;
 int blockColor;
 
@@ -55,7 +59,7 @@ void writeCompressedFile(FILE * fp) {
 	printf("Num. of pixels on outline: %d\nColor of block: %d\n", num_of_pixels_on_outline, blockColor);
 
 	std::vector <Pixel> :: iterator itr;
-	itr = std::unique(border.begin(), border.end());
+	border.erase(std::unique(border.begin(), border.end(), uniqueCompare), border.end());
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
 		printf("(%d,%d)\n", itr->getX(), itr->getY());
