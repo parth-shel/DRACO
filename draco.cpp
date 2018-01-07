@@ -33,6 +33,7 @@ int main(int argc, char ** argv) {
 			fclose(check);
 			strcpy(outputFile, argv[2]);
 			strcat(outputFile, ".draco");
+			printf("here\n");
 			printf("here;%s\n%s\n", inputFile, outputFile);
 			compress(inputFile, outputFile);
 		}
