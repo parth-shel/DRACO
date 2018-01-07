@@ -38,10 +38,6 @@ class Pixel {
 	}
 };
 
-bool uniqueCompare(const Pixel& l, const Pixel& r) {
-	return(l.getX() == r.getX() && l.getY() == r.getY());
-}
-
 std::vector<Pixel> border;
 int blockColor;
 
@@ -59,8 +55,8 @@ void writeCompressedFile(FILE * fp) {
 	printf("Num. of pixels on outline: %d\nColor of block: %d\n",
 		num_of_pixels_on_outline, blockColor);
 
+	border.erase(std::unique(border.begin(), border.end()), border.end());
 	std::vector <Pixel> :: iterator itr;
-	border.erase(std::unique(border.begin(), border.end(), uniqueCompare), border.end());
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
 		printf("(%d,%d)\n", itr->getX(), itr->getY());
@@ -131,6 +127,7 @@ void carveOutline(Pixel thisPixel) {
 	int y = thisPixel.getY();
 	if(bitmap[x][y] == blockColor)
 		visited[x][y] = true; //memoize
+	
 	if(liesOnBorder(thisPixel) && colorOf(thisPixel) == blockColor) {
 		//if(setOfPixels.find(thisPixel) == setOfPixels.end()) {
 			border.push_back(thisPixel);
