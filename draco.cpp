@@ -32,7 +32,7 @@ int main(int argc, char ** argv) {
 			}
 			fclose(check);
 			strcpy(outputFile, argv[2]);
-			strcat(outputFile, ".draco");
+			strcat(outputFile, ".DRACO");
 			compress(inputFile, outputFile);
 		}
 		else if(strcmp(argv[1], "-d") == 0) { //de-compress
@@ -44,7 +44,7 @@ int main(int argc, char ** argv) {
 			}
 			fclose(check);
 			strcpy(outputFile, argv[2]);
-			strcat(outputFile, ".draco");
+			strcat(outputFile, ".PIC");
 			decompress(inputFile, outputFile);
 		}
 		else {
