@@ -48,10 +48,10 @@ void writeCompressedFile(FILE * fp) {
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
 	
-	//std::vector <Pixel> :: iterator itr;
-	//for(itr = border.begin(); itr != border.end(); ++itr) {
-		//fprintf(fp, "%d,%d\n", *itr, *itr);
-	//}
+	std::vector <Pixel> :: iterator itr;
+	for(itr = border.begin(); itr != border.end(); ++itr) {
+		fprintf(fp, "%d,%d\n", *itr.getX(), *itr.getY());
+	}
 }
 
 bool isValidPixel(Pixel p) {
