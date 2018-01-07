@@ -70,7 +70,17 @@ bool isVisitedPixel(Pixel p) {
 	}
 }
 
+bool liesOnEdge(Pixel p) {
+	int x = p.getX();
+	int y = p.getY();
+
+	return (x == 0 || x == IMAGE_WIDTH-1 || y == 0 || y == IMAGE_HEIGHT-1);
+}
+
 bool liesOnBorder(Pixel p) {
+	if(liesOnEdge(p))
+		return true;
+	
 	int x = p.getX();
 	int y = p.getY();
 	
