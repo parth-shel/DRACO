@@ -29,6 +29,8 @@ int main(int argc, char ** argv) {
 				exit(-1);
 			}
 			fclose(check);
+			strcpy(outputFile, inputFile);
+			strcat(outputFile, ".draco");
 			compress(inputFile, outputFile);
 		}
 		else if(strcmp(argv[1], "-d")) { //de-compress
