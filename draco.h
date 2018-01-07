@@ -66,12 +66,12 @@ void writeCompressedFile(FILE * fp) {
 	
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
-	printf("Num. of pixels on outline: %d\nColor of block: %d\n",
-		num_of_pixels_on_outline, blockColor);
+	//printf("Num. of pixels on outline: %d\nColor of block: %d\n",
+	//	num_of_pixels_on_outline, blockColor);
 
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
-		printf("(%d,%d)\n", itr->getX(), itr->getY());
+		//printf("(%d,%d)\n", itr->getX(), itr->getY());
 	}
 }
 
@@ -135,9 +135,14 @@ bool liesOnBorder(Pixel p) {
 void carveOutline(Pixel thisPixel) {
 	if(!isValidPixel(thisPixel))
 		return;
+	
+	if(colorOf(thisPixel) == DEFAULT_BKCOLOR) //don't save the background
+		return;
+	
 	int x = thisPixel.getX();
 	int y = thisPixel.getY();
-	if(bitmap[x][y] == blockColor)
+	
+	if(colorOf(thisPixel) == blockColor)
 		visited[x][y] = true; //memoize
 	
 	if(liesOnBorder(thisPixel) && colorOf(thisPixel) == blockColor) {
@@ -145,12 +150,12 @@ void carveOutline(Pixel thisPixel) {
 		//return;
 	}
 	
-	//resursive step:
 	Pixel left = Pixel(x-1, y);
 	Pixel right = Pixel(x+1, y);
 	Pixel up = Pixel(x, y-1);
 	Pixel down  = Pixel(x, y+1);
 
+	//recursive step:
 	if(!isVisitedPixel(left) && colorOf(left) == blockColor)
 		carveOutline(left);
 	
