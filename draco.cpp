@@ -10,8 +10,8 @@
 
 #include"draco.h" //comression library
 
-char inputFile [32]; //input file name
-char outputFile [32]; //output file name
+char * inputFile; //input file name
+char * outputFile; //output file name
 
 //main
 int main(int argc, char ** argv) {
@@ -21,7 +21,9 @@ int main(int argc, char ** argv) {
 		exit(-1);
 	}
 	else {
-		if(strcmp(argv[1], "c") == 0) { //compress
+	inputFile = (char *) malloc(32 * sizeof(char));
+	outputFile = (char *) malloc(32 * sizeof(char));
+		if(strcmp(argv[1], "-c") == 0) { //compress
 			strcpy(inputFile, argv[2]);
 			FILE * check = fopen(inputFile, "r");
 			if(check == NULL) { //file does not exist
@@ -34,7 +36,7 @@ int main(int argc, char ** argv) {
 			printf("%s\n%s\n", inputFile, outputFile);
 			compress(inputFile, outputFile);
 		}
-		else if(strcmp(argv[1], "d") == 0) { //de-compress
+		else if(strcmp(argv[1], "-d") == 0) { //de-compress
 			strcpy(inputFile, argv[2]);
 			FILE * check = fopen(inputFile, "r");
 			if(check == NULL)  { //file does not exist
