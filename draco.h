@@ -4,8 +4,6 @@
 // @version v:0.1 - Jan 6, 2018
 // @author parth_shel
 
-//#include<stdlib>
-//#include<stdio>
 #include<vector>
 #include<algorithm>
 
@@ -54,11 +52,13 @@ void readUnCompressedFile(FILE * fp) {
 void writeCompressedFile(FILE * fp) {
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
-	
+	printf("Num. of pixels on outline: %d\nColor of block: %d\n", num_of_pixels_on_outline, blockColor);
+
 	std::vector <Pixel> :: iterator itr;
 	itr = std::unique(border.begin(), border.end());
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
+		printf("(%d,%d)\n", itr->getX(), itr->getY());
 	}
 }
 
