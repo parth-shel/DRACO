@@ -15,18 +15,164 @@
 int bitmap [IMAGE_WIDTH] [IMAGE_HEIGHT] = {DEFAULT_BKCOLOR};
 bool visited [IMAGE_WIDTH] [IMAGE_HEIGHT] = {false};
 
-struct Pixel {
-	int color;
+class Pixel {
+	private:
 	int x;
 	int y;
+	
+	public:
+	Pixel(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	int getX() {
+		return this.x;
+	}
+	int getY() {
+		return this.y;
+	}
 };
 
 std::vector<Pixel> border;
+int blockColor;
+
+void readUnCompressedFile(FILE * fp) {
+	int x, y, color;
+	while(fscanf(fp, "%d,%d,%d\n", &x, &y, &color) != FOF) {
+		bitmap [x] [y] = color;
+	}
+}
+
+void writeCompressedFile(FILE * fp) {
+
+}
+
+bool isValidPixel(Pixel p) {
+	int x = p.getX();
+	int y = p.getY();
+	if(x >= 0 && x < IMAGE_WIDTH && y >= 0 && y < IMAGE_HEIGHT) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool isVisitedPixel(Pixel p) {
+	if(!isValidPixel(p)) {
+		return false;
+	}
+	else {
+		int x = p.getX();
+		int y = p.getY();
+		return visited[x][y];
+	}
+}
+
+bool liesOnBorder(Pixel p) {
+	int x = p.getX();
+	int y = p.getY();
+	
+	int thisColor = bitmap[x][y];
+	int leftColor = bitmap[x-1][y];
+	int rightColor = bitmap[x+1][y];
+	int upColor = bitmap[x][y-1];
+	int downColor = bitmap[x][y+1];
+
+	if(leftColor != thisColor || rightColor != thisColor || 
+	   upColor != thisColor || downColor != thisColor) {
+	   	return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void carveOutline(Pixel thisPixel) {
+	if(!isValidPixel(thisPixel))
+		return;
+	int x = thisPixel.getX();
+	int y = thisPixel.getY();
+	vistited[x][y] = true; //memoize
+	if(liesOnBorder(thisPixel)) {
+		border.pushback(thisPixel);
+		return;
+	}
+	
+	//resursive step:
+	Pixel left = new Pixel(x-1, y);
+	Pixel right = new Pixel(x+1, y);
+	Pixel up = new Pixel(x, y-1);
+	Pixel down  = new Pixel(x, y+1);
+
+	if(!isVisitedPixel(left))
+		carveOutline(left);
+	
+	if(!isVisitedPixel(right))
+		carveOutline(right);
+	
+	if(!isVisitedPixel(up))
+		carveOutline(up);
+	
+	if(!isVisitedPixel(down));
+		carveOutline(down);
+}
 
 void compress(char * inputFile, char * outputFile) {
+	FILE * in = fopen(inputFile, "r");
+	if(in == NULL)
+		return;
+	readUnCompressedFile(in);
+	fclose(in);
+	FILE * redundant = fopen(outputFile, "w+");
+	fclose(redundant);
+	
+	for(int i = 0;i < IMAGE_WIDTH;i++) {
+		for(int j = 0;j < IMAGE_HEIGHT;j++) {
+			if(!visited[i][j]) {
+				blockColor = bitmap[i][j];
+				carveOutline(new Pixel(i, j));
+				FILE * out = fopen(outputFile, "w");
+				writeCompressedFile(out);
+				fclose(out);
+				border.clear();
+			}
+		}
+	}
+
 	return;
 }
 
+void readCompressedFile(FILE * fp) {
+
+}
+
+void writeUnCompressedFile(FILE * fp) {
+
+}
+
+void markOutline() {
+
+}
+
+void floodFill(int x, int y) {
+
+}
+
+void parse(FILE * in, char * out) {
+
+}
+
 void decompress(char * inputFile, char * outputFile) {
+	FILE * in = fopen(inputFile, "r");
+	if(in == NULL)
+		return;
+	FILE * redundant = fopen(outputFile, "w+");
+	fclose(redundant);
+
+	parse(in, outputFile);
+
+	fclose(in);
 	return;
 }
