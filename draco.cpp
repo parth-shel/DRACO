@@ -21,7 +21,7 @@ int main(int argc, char ** argv) {
 		exit(-1);
 	}
 	else {
-		if(strcmp(argv[1], "-c") == 0) { //compress
+		if(strcmp(argv[1], "c") == 0) { //compress
 			strcpy(inputFile, argv[2]);
 			FILE * check = fopen(inputFile, "r");
 			if(check == NULL) { //file does not exist
@@ -34,7 +34,7 @@ int main(int argc, char ** argv) {
 			printf("%s\n%s\n", inputFile, outputFile);
 			compress(inputFile, outputFile);
 		}
-		else if(strcmp(argv[1], "-d") == 0) { //de-compress
+		else if(strcmp(argv[1], "d") == 0) { //de-compress
 			strcpy(inputFile, argv[2]);
 			FILE * check = fopen(inputFile, "r");
 			if(check == NULL)  { //file does not exist
