@@ -50,7 +50,7 @@ void writeCompressedFile(FILE * fp) {
 	
 	std::vector <Pixel> :: iterator itr;
 	for(itr = border.begin(); itr != border.end(); ++itr) {
-		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY());cat 
+		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
 	}
 }
 
