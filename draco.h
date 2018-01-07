@@ -136,9 +136,6 @@ void carveOutline(Pixel thisPixel) {
 	if(!isValidPixel(thisPixel))
 		return;
 	
-	if(colorOf(thisPixel) == DEFAULT_BKCOLOR) //don't save the background
-		return;
-	
 	int x = thisPixel.getX();
 	int y = thisPixel.getY();
 	
