@@ -65,9 +65,9 @@ void writeCompressedFile(FILE * fp) {
 	std::vector <Pixel> :: iterator itr;
 	
 	int num_of_pixels_on_outline = border.size();
-	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
+	fprintf(fp, "%d\n%d\n", blockColor, num_of_pixels_on_outline);
 	//printf("Num. of pixels on outline: %d\nColor of block: %d\n",
-	//	num_of_pixels_on_outline, blockColor);
+	//	blockColor, num_of_pixels_on_outline);
 
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
