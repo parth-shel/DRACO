@@ -30,6 +30,7 @@ int main(int argc, char ** argv) {
 				printf("the file %s does not exist!\n", inputFile);
 				exit(-1);
 			}
+			printf("maa ki");
 			fclose(check);
 			printf("here2\n");
 			strcpy(outputFile, argv[2]);
