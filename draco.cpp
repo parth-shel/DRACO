@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
 			fclose(check);
 			strcpy(outputFile, argv[2]);
 			strcat(outputFile, ".draco");
-			printf("%s\n%s\n", inputFile, outputFile);
+			printf("here;%s\n%s\n", inputFile, outputFile);
 			compress(inputFile, outputFile);
 		}
 		else if(strcmp(argv[1], "-d") == 0) { //de-compress
