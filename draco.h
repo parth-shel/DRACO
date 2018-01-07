@@ -60,14 +60,15 @@ void readUnCompressedFile(FILE * fp) {
 }
 
 void writeCompressedFile(FILE * fp) {
+	std::sort(border.begin(), border.end());
+	border.erase(std::unique(border.begin(), border.end()), border.end());
+	std::vector <Pixel> :: iterator itr;
+	
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
 	printf("Num. of pixels on outline: %d\nColor of block: %d\n",
 		num_of_pixels_on_outline, blockColor);
 
-	std::sort(border.begin(), border.end());
-	border.erase(std::unique(border.begin(), border.end()), border.end());
-	std::vector <Pixel> :: iterator itr;
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
 		printf("(%d,%d)\n", itr->getX(), itr->getY());
