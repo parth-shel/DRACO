@@ -7,7 +7,7 @@
 //#include<stdlib>
 //#include<stdio>
 #include<vector>
-#include<unordered_set>
+#include<algorithm>
 
 #define IMAGE_WIDTH 10 //COLUMNS
 #define IMAGE_HEIGHT 10 //ROWS
@@ -33,6 +33,11 @@ class Pixel {
 	int getY() {
 		return y;
 	}
+
+	//operator== overloading
+	bool operator==(Pixel& that)const {
+		return(this->x == that.x && this->y == that.y);
+	}
 };
 
 std::vector<Pixel> border;
@@ -51,6 +56,7 @@ void writeCompressedFile(FILE * fp) {
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
 	
 	std::vector <Pixel> :: iterator itr;
+	itr = std::unique(border.begin(), border.end());
 	for(itr = border.begin(); itr != border.end(); ++itr) {
 		fprintf(fp, "%d,%d\n", itr->getX(), itr->getY()); 
 	}
