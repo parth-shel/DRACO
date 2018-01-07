@@ -7,6 +7,7 @@
 //#include<stdlib>
 //#include<stdio>
 #include<vector>
+#include<unordered_set>
 
 #define IMAGE_WIDTH 10 //COLUMNS
 #define IMAGE_HEIGHT 10 //ROWS
@@ -119,7 +120,10 @@ void carveOutline(Pixel thisPixel) {
 	int y = thisPixel.getY();
 	visited[x][y] = true; //memoize
 	if(liesOnBorder(thisPixel)) {
-		border.push_back(thisPixel);
+		//if(setOfPixels.find(thisPixel) == setOfPixels.end()) {
+			border.push_back(thisPixel);
+			//setOfPixels.insert(thisPixel);
+		//}
 		//return;
 	}
 	
