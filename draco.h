@@ -40,6 +40,7 @@ int blockColor;
 void readUnCompressedFile(FILE * fp) {
 	int x, y, color;
 	while(fscanf(fp, "%d,%d,%d\n", &x, &y, &color) != EOF) {
+		printf("(%d,%d) = %d\n", x, y, color);
 		bitmap [x] [y] = color;
 	}
 }
