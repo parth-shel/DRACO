@@ -29,7 +29,7 @@ int main(int argc, char ** argv) {
 				exit(-1);
 			}
 			fclose(check);
-			strcpy(outputFile, inputFile);
+			strcpy(outputFile, argv[2]);
 			strcat(outputFile, ".draco");
 			compress(inputFile, outputFile);
 		}
@@ -41,6 +41,8 @@ int main(int argc, char ** argv) {
 				exit(-1);
 			}
 			fclose(check);
+			strcpy(outputFile, argv[2]);
+			strcat(outputFile, ".draco");
 			decompress(inputFile, outputFile);
 		}
 		else {
