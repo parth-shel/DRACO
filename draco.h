@@ -45,7 +45,13 @@ void readUnCompressedFile(FILE * fp) {
 }
 
 void writeCompressedFile(FILE * fp) {
-
+	int num_of_pixels_on_outline = border.size();
+	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
+	
+	vector <Pixel> :: iterator itr;
+	for(itr = border.begin(); itr != border.end(); ++itr) {
+		fprintf(fp, "%d,%d\n", *itr.getX(), *itr.getY());
+	}
 }
 
 bool isValidPixel(Pixel p) {
@@ -107,7 +113,7 @@ void carveOutline(Pixel thisPixel) {
 	vistited[x][y] = true; //memoize
 	if(liesOnBorder(thisPixel)) {
 		border.pushback(thisPixel);
-		return;
+		//return;
 	}
 	
 	//resursive step:
