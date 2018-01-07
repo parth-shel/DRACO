@@ -177,7 +177,7 @@ void compress(char * inputFile, char * outputFile) {
 	
 	for(int i = 0;i < IMAGE_WIDTH;i++) {
 		for(int j = 0;j < IMAGE_HEIGHT;j++) {
-			if(!visited[i][j]) {
+			if(!visited[i][j] && bitmap[i][j] != DEFAULT_BKCOLOR) {
 				blockColor = bitmap[i][j];
 				carveOutline(Pixel(i, j));
 				FILE * out = fopen(outputFile, "a");
