@@ -31,6 +31,7 @@ int main(int argc, char ** argv) {
 				exit(-1);
 			}
 			fclose(check);
+			printf("here2\n");
 			strcpy(outputFile, argv[2]);
 			strcat(outputFile, ".draco");
 			printf("here\n");
