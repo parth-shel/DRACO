@@ -24,15 +24,15 @@ int main(int argc, char ** argv) {
 	inputFile = (char *) malloc(32 * sizeof(char));
 	outputFile = (char *) malloc(32 * sizeof(char));
 		if(strcmp(argv[1], "-c") == 0) { //compress
-			strcpy(inputFile, argv[2]);
+			//strcpy(inputFile, argv[2]);
 			/*FILE * check = fopen(inputFile, "r");
 			if(check == NULL) { //file does not exist
 				printf("the file %s does not exist!\n", inputFile);
 				exit(-1);
 			}
 			fclose(check);*/
-			strcpy(outputFile, argv[2]);
-			strcat(outputFile, ".draco");
+			//strcpy(outputFile, argv[2]);
+			//strcat(outputFile, ".draco");
 			printf("here;%s\n%s\n", inputFile, outputFile);
 			compress(inputFile, outputFile);
 		}
