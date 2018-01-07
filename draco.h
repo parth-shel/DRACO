@@ -44,7 +44,7 @@ int blockColor;
 void readUnCompressedFile(FILE * fp) {
 	int x, y, color;
 	while(fscanf(fp, "%d,%d,%d\n", &x, &y, &color) != EOF) {
-		printf("(%d,%d) = %d\n", x, y, color);
+		//printf("(%d,%d) = %d\n", x, y, color);
 		bitmap [x] [y] = color;
 	}
 }
@@ -167,7 +167,7 @@ void compress(char * inputFile, char * outputFile) {
 			if(!visited[i][j]) {
 				blockColor = bitmap[i][j];
 				carveOutline(Pixel(i, j));
-				FILE * out = fopen(outputFile, "w");
+				FILE * out = fopen(outputFile, "w+");
 				writeCompressedFile(out);
 				fclose(out);
 				border.clear();
