@@ -4,8 +4,8 @@
 // @version v:0.1 - Jan 6, 2018
 // @author parth_shel
 
-#include<vector>
 #include<algorithm>
+#include<vector>
 
 #define IMAGE_WIDTH 10 //COLUMNS
 #define IMAGE_HEIGHT 10 //ROWS
@@ -38,7 +38,7 @@ class Pixel {
 	}
 };
 
-bool uniqueCompare(Pixel& l, Pixel& r) {
+bool uniqueCompare(const Pixel& l, const Pixel& r) {
 	return(l.getX() == r.getX() && l.getY() == r.getY());
 }
 
@@ -56,7 +56,8 @@ void readUnCompressedFile(FILE * fp) {
 void writeCompressedFile(FILE * fp) {
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
-	printf("Num. of pixels on outline: %d\nColor of block: %d\n", num_of_pixels_on_outline, blockColor);
+	printf("Num. of pixels on outline: %d\nColor of block: %d\n",
+		num_of_pixels_on_outline, blockColor);
 
 	std::vector <Pixel> :: iterator itr;
 	border.erase(std::unique(border.begin(), border.end(), uniqueCompare), border.end());
