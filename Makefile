@@ -1,7 +1,7 @@
 goal: draco git
 
 draco:
-	gcc -g -o draco draco.cpp
+	g++ -g -o draco draco.cpp
 
 git:
 	git add draco.cpp draco.h Makefile README.md

@@ -4,13 +4,13 @@
 // @version v:0.1 - Jan 6, 2018
 // @author parth_shel
 
-#include<stdlib>
-#include<stdio>
+//#include<stdlib>
+//#include<stdio>
 #include<vector>
 
 #define IMAGE_WIDTH 10 //COLUMNS
 #define IMAGE_HEIGHT 10 //ROWS
-#define DEFAULT_BKCOLR 0 //BGI BLACK
+#define DEFAULT_BKCOLOR 0 //BGI BLACK
 
 int bitmap [IMAGE_WIDTH] [IMAGE_HEIGHT] = {DEFAULT_BKCOLOR};
 bool visited [IMAGE_WIDTH] [IMAGE_HEIGHT] = {false};
@@ -22,15 +22,15 @@ class Pixel {
 	
 	public:
 	Pixel(int x, int y) {
-		this.x = x;
-		this.y = y;
+		this->x = x;
+		this->y = y;
 	}
 
 	int getX() {
-		return this.x;
+		return x;
 	}
 	int getY() {
-		return this.y;
+		return y;
 	}
 };
 
@@ -39,7 +39,7 @@ int blockColor;
 
 void readUnCompressedFile(FILE * fp) {
 	int x, y, color;
-	while(fscanf(fp, "%d,%d,%d\n", &x, &y, &color) != FOF) {
+	while(fscanf(fp, "%d,%d,%d\n", &x, &y, &color) != EOF) {
 		bitmap [x] [y] = color;
 	}
 }
@@ -48,10 +48,10 @@ void writeCompressedFile(FILE * fp) {
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", num_of_pixels_on_outline, blockColor);
 	
-	vector <Pixel> :: iterator itr;
-	for(itr = border.begin(); itr != border.end(); ++itr) {
-		fprintf(fp, "%d,%d\n", *itr.getX(), *itr.getY());
-	}
+	//std::vector <Pixel> :: iterator itr;
+	//for(itr = border.begin(); itr != border.end(); ++itr) {
+		//fprintf(fp, "%d,%d\n", *itr, *itr);
+	//}
 }
 
 bool isValidPixel(Pixel p) {
@@ -110,17 +110,17 @@ void carveOutline(Pixel thisPixel) {
 		return;
 	int x = thisPixel.getX();
 	int y = thisPixel.getY();
-	vistited[x][y] = true; //memoize
+	visited[x][y] = true; //memoize
 	if(liesOnBorder(thisPixel)) {
-		border.pushback(thisPixel);
+		border.push_back(thisPixel);
 		//return;
 	}
 	
 	//resursive step:
-	Pixel left = new Pixel(x-1, y);
-	Pixel right = new Pixel(x+1, y);
-	Pixel up = new Pixel(x, y-1);
-	Pixel down  = new Pixel(x, y+1);
+	Pixel left = Pixel(x-1, y);
+	Pixel right = Pixel(x+1, y);
+	Pixel up = Pixel(x, y-1);
+	Pixel down  = Pixel(x, y+1);
 
 	if(!isVisitedPixel(left))
 		carveOutline(left);
@@ -148,7 +148,7 @@ void compress(char * inputFile, char * outputFile) {
 		for(int j = 0;j < IMAGE_HEIGHT;j++) {
 			if(!visited[i][j]) {
 				blockColor = bitmap[i][j];
-				carveOutline(new Pixel(i, j));
+				carveOutline(Pixel(i, j));
 				FILE * out = fopen(outputFile, "w");
 				writeCompressedFile(out);
 				fclose(out);
