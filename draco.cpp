@@ -5,7 +5,7 @@
 
 //include header files:
 #include<string.h>
-#include<stdlib.h>
+//#include<stdlib.h>
 #include<stdio.h>
 
 #include"draco.h" //comression library
