@@ -66,7 +66,7 @@ void writeCompressedFile(FILE * fp) {
 	
 	int num_of_pixels_on_outline = border.size();
 	fprintf(fp, "%d\n%d\n", blockColor, num_of_pixels_on_outline);
-	//printf("Num. of pixels on outline: %d\nColor of block: %d\n",
+	//printf("Color of block: %d\nNum. of pixels on outline: %d\n",
 	//	blockColor, num_of_pixels_on_outline);
 
 	for(itr = border.begin(); itr != border.end(); ++itr) {
