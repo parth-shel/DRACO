@@ -213,7 +213,7 @@ void sweepCompress(char * inputFile, char * outputFile) {
 		for(int j = 0;j < IMAGE_HEIGHT;j++) {
 			Pixel thisPixel = Pixel(i, j);
 			int thisColor = bitmap[i][j];
-			if(liesOnBorder(thisPixel)) {
+			if(liesOnBorder(thisPixel) && thisColor != DEFAULT_BKCOLOR) {
 				mapOfBorders[thisColor].push_back(thisPixel);
 			}
 		}
