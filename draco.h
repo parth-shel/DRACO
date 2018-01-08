@@ -203,8 +203,6 @@ void sweepCompress(char * inputFile, char * outputFile) {
 		return;
 	readUnCompressedFile(in);
 	fclose(in);
-	FILE * redundant = fopen(outputFile, "w");
-	fclose(redundant);
 
 	std::map<int, std::vector<Pixel>> mapOfBorders;
 
@@ -231,6 +229,9 @@ void sweepCompress(char * inputFile, char * outputFile) {
 			fprintf(out, "%d,%d\n", vectorItr->getX(), vectorItr->getY());
 		}
 	}
+	fclose(out);
+
+	return;
 }
 
 void readCompressedFile(FILE * fp) {
