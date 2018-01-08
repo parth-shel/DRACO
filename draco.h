@@ -198,12 +198,14 @@ void compress(char * inputFile, char * outputFile) {
 }
 
 void sweepCompress(char * inputFile, char * outputFile) {
+	//read un-compressed file:
 	FILE * in = fopen(inputFile, "r");
 	if(in == NULL)
 		return;
 	readUnCompressedFile(in);
 	fclose(in);
 
+	//map each color to a vector of pixels that are outlines for the blocks
 	std::map<int, std::vector<Pixel>> mapOfBorders;
 
 	//line sweeping alg.
