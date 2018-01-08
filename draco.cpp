@@ -59,7 +59,7 @@ int main(int argc, char ** argv) {
 			decompress(inputFile, outputFile);
 		}
 		else {
-		printf("incorrect usage of flag! -c to compress and -d to decompress\n");
+		printf("incorrect usage of flag! -c to compress, -s to sweepCompress and -d to decompress\n");
 		exit(-1);
 		}
 	}
