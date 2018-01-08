@@ -222,14 +222,18 @@ void sweepCompress(char * inputFile, char * outputFile) {
 	for(std::map<int, std::vector<Pixel>>::iterator mapItr = mapOfBorders.begin();
 		mapItr != mapOfBorders.end(); ++mapItr) {
 		
+		//blockColor & size:	
 		fprintf(out, "%d\n%d\n", mapItr->first, mapItr->second.size());
 		
 		for(std::vector<Pixel>::iterator vectorItr = mapItr->second.begin();
 			vectorItr != mapItr->second.end(); ++vectorItr) {
+			//pixels:
 			fprintf(out, "%d,%d\n", vectorItr->getX(), vectorItr->getY());
 		}
 	}
 	fclose(out);
+
+	mapOfBorders.clear();
 
 	return;
 }
