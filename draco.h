@@ -6,6 +6,7 @@
 
 #include<algorithm>
 #include<vector>
+#include<map>
 
 #define IMAGE_WIDTH 640 //COLUMNS
 #define IMAGE_HEIGHT 480 //ROWS
@@ -196,6 +197,42 @@ void compress(char * inputFile, char * outputFile) {
 	return;
 }
 
+void sweepCompress(char * inputFile, char * outputFile) {
+	FILE * in = fopen(inputFile, "r");
+	if(in == NULL)
+		return;
+	readUnCompressedFile(in);
+	fclose(in);
+	FILE * redundant = fopen(outputFile, "w");
+	fclose(redundant);
+
+	std::map<int, std::vector<Pixel>> mapOfBorders;
+
+	//line sweeping alg.
+	for(int i = 0;i < IMAGE_WIDTH;i++) {
+		for(int j = 0;j < IMAGE_HEIGHT;j++) {
+			Pixel thisPixel = Pixel(i, j);
+			int thisColor = bitmap[i][j];
+			if(liesOnBorder(thisPixel)) {
+				mapOfBorders[thisColor].push_back(thisPixel);
+			}
+		}
+	}
+
+	//write compressed file:
+	FILE * out = fopen(outputFile, "w");
+	for(std::map<int, std::vector<Pixel>>::iterator mapItr = mapOfBorders.begin();
+		mapItr != mapOfBorders.end(); ++mapItr) {
+		
+		fprintf(out, "%d\n%d\n", mapItr->first, mapItr->second.size());
+		
+		for(std::vector<Pixel>::iterator vectorItr = mapItr->second.begin();
+			vectorItr != mapItr->second.end(); ++vectorItr) {
+			fprintf(out, "%d,%d\n", vectorItr->getX(), vectorItr->getY());
+		}
+	}
+}
+
 void readCompressedFile(FILE * fp) {
 
 }
@@ -213,7 +250,7 @@ void floodFill(int x, int y) {
 }
 
 void parse(FILE * in, char * out) {
-
+	
 }
 
 void decompress(char * inputFile, char * outputFile) {
