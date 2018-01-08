@@ -7,8 +7,8 @@
 #include<algorithm>
 #include<vector>
 
-#define IMAGE_WIDTH 20 //COLUMNS
-#define IMAGE_HEIGHT 15 //ROWS
+#define IMAGE_WIDTH 640 //COLUMNS
+#define IMAGE_HEIGHT 480 //ROWS
 #define DEFAULT_BKCOLOR 0 //BGI BLACK
 
 int bitmap [IMAGE_WIDTH] [IMAGE_HEIGHT] = {DEFAULT_BKCOLOR};
