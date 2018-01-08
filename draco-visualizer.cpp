@@ -51,8 +51,6 @@ void displayCompressedFile(FILE * fp) {
 	while(1){
 		fscanf(fp, "%d\n%d\n", &blockColor, &blockSize);
 		setcolor(blockColor);
-		if(blockColor == 4)
-			printf("found it bitch");
 		for(int i = 0;i < blockSize;i++) {
 			fscanf(fp, "%d,%d\n", &x, &y);
 			_putpixel(x, y);

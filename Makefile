@@ -12,3 +12,4 @@ git:
 
 clean:
 	rm -rf draco
+	rm -rf draco-visualizer
