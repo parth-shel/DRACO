@@ -241,34 +241,43 @@ void sweepCompress(char * inputFile, char * outputFile) {
 }
 
 void readCompressedFile(FILE * fp) {
+	int blockColor, blockSize, x, y;
+	while(1) {
+		fscanf(fp, "%d\n%d\n", &blockColor, &blockSize);
+		for(int i = 0;i < blockSize;i++) {
+			fscanf(fp, "%d,%d\n", &x, &y);
+			bitmap[x][y] = blockColor;
+		}
 
+		if(fgetc(fp) == EOF)
+			break;
+		else
+			fseek(fp, -1, SEEK_CUR);
+	}
 }
 
 void writeUnCompressedFile(FILE * fp) {
-
-}
-
-void markOutline() {
-
-}
-
-void floodFill(int x, int y) {
-
-}
-
-void parse(FILE * in, char * out) {
-	
+	for(int i = 0;i < IMAGE_WIDTH;i++) {
+		for(int j = 0;j < IMAGE_HEIGHT;j++) {
+			int thisColor = bitmap[i][j];
+			if(thisColor != DEFAULT_BKCOLOR) {
+				fprintf(fp, "%d,%d,%d\n", i, j, thisColor);
+			}
+		}
+	}
 }
 
 void decompress(char * inputFile, char * outputFile) {
 	FILE * in = fopen(inputFile, "r");
 	if(in == NULL)
 		return;
-	FILE * redundant = fopen(outputFile, "w");
-	fclose(redundant);
-
-	parse(in, outputFile);
-
+	
+	readCompressedFile(in);
 	fclose(in);
+
+	FILE * out = fopen(outputFile, "w");
+	writeUnCompressedFile(out);
+	fclose(out);
+
 	return;
 }
