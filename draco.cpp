@@ -32,7 +32,18 @@ int main(int argc, char ** argv) {
 			fclose(check);
 			strcpy(outputFile, argv[2]);
 			strcat(outputFile, ".DRACO");
-			//compress(inputFile, outputFile);
+			compress(inputFile, outputFile);
+		}
+		else if(strcmp(argv[1], "-s") == 0) { //sweep compress
+			strcpy(inputFile, argv[2]);
+			FILE * check = fopen(inputFile, "r");
+			if(check == NULL) { //file does not exist
+				printf("the file %s does not exist!\n", inputFile);
+				exit(-1);
+			}
+			fclose(check);
+			strcpy(outputFile, argv[2]);
+			strcat(outputFile, ".DRACO");
 			sweepCompress(inputFile, outputFile);
 		}
 		else if(strcmp(argv[1], "-d") == 0) { //de-compress
