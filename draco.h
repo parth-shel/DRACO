@@ -240,6 +240,8 @@ void sweepCompress(char * inputFile, char * outputFile) {
 	return;
 }
 
+std::set<int> allColors;
+
 void readCompressedFile(FILE * fp) {
 	int blockColor, blockSize, x, y;
 	while(1) {
@@ -249,6 +251,8 @@ void readCompressedFile(FILE * fp) {
 			bitmap[x][y] = blockColor;
 		}
 
+		allColors.add(blockColor);
+		
 		if(fgetc(fp) == EOF)
 			break;
 		else
@@ -262,6 +266,26 @@ void writeUnCompressedFile(FILE * fp) {
 			int thisColor = bitmap[i][j];
 			if(thisColor != DEFAULT_BKCOLOR) {
 				fprintf(fp, "%d,%d,%d\n", i, j, thisColor);
+			}
+		}
+	}
+}
+
+bool liesInsideShape(Pixel p, int color) {
+
+}
+
+void sweepFill() {
+	for(std::set<int>::iterator itr = allColors.begin(); 
+		itr != allColors.end(); ++itr) {
+		
+		for(int i = 0; i < IMAGE_WIDTH; i++) {
+			for(int j = 0; j < IMAGE_WIDTH; j++) {
+				Pixel thisPixel = Pixel(i, j);
+				int blockColor = itr->first;
+				if(liesInsideShape(thisPixel, blockColor) {
+					bitmap[i][j] = blockColor;
+				}
 			}
 		}
 	}
