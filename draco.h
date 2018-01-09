@@ -7,6 +7,7 @@
 #include<algorithm>
 #include<vector>
 #include<map>
+#include<set>
 
 #define IMAGE_WIDTH 640 //COLUMNS
 #define IMAGE_HEIGHT 480 //ROWS
@@ -251,7 +252,7 @@ void readCompressedFile(FILE * fp) {
 			bitmap[x][y] = blockColor;
 		}
 
-		allColors.add(blockColor);
+		allColors.insert(blockColor);
 		
 		if(fgetc(fp) == EOF)
 			break;
@@ -282,8 +283,8 @@ void sweepFill() {
 		for(int i = 0; i < IMAGE_WIDTH; i++) {
 			for(int j = 0; j < IMAGE_WIDTH; j++) {
 				Pixel thisPixel = Pixel(i, j);
-				int blockColor = itr->first;
-				if(liesInsideShape(thisPixel, blockColor) {
+				int blockColor = *itr;
+				if(liesInsideShape(thisPixel, blockColor)) {
 					bitmap[i][j] = blockColor;
 				}
 			}
