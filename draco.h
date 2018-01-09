@@ -272,6 +272,15 @@ void writeUnCompressedFile(FILE * fp) {
 	}
 }
 
+void unMask(std::vector<Pixel> mask, int color) {
+	for(std::vector<Pixel>::iterator itr = mask.begin();
+		itr != mask.end(); ++itr) {
+		int x = itr->getX();
+		int y = itr->getY();
+		bitmap[x][y] = color;
+	}
+}
+
 bool liesInsideShape(Pixel p, int color) {
 
 }
@@ -279,16 +288,19 @@ bool liesInsideShape(Pixel p, int color) {
 void sweepFill() {
 	for(std::set<int>::iterator itr = allColors.begin(); 
 		itr != allColors.end(); ++itr) {
-		
+	
+		std::vector<Pixel> mask;
+		int blockColor = *itr;
 		for(int i = 0; i < IMAGE_WIDTH; i++) {
 			for(int j = 0; j < IMAGE_WIDTH; j++) {
 				Pixel thisPixel = Pixel(i, j);
-				int blockColor = *itr;
 				if(liesInsideShape(thisPixel, blockColor)) {
-					bitmap[i][j] = blockColor;
+					mask.push_back(thisPixel);
 				}
 			}
 		}
+		unMask(mask, blockColor);
+		mask.clear();
 	}
 }
 
