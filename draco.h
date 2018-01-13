@@ -289,7 +289,7 @@ bool liesInsideShape(Pixel p, int color) {
 		if(bitmap[i][y] == color)
 			interactionsToTheLeft++;
 	}
-	for(int i = p.getY(); i < IMAGE_WIDTH; i++) {
+	for(int i = p.getX() + 1; i < IMAGE_WIDTH; i++) {
 		if(bitmap[i][y] == color)
 			interactionsToTheRight++;
 	}
