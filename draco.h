@@ -282,7 +282,23 @@ void unMask(std::vector<Pixel> mask, int color) {
 }
 
 bool liesInsideShape(Pixel p, int color) {
-
+	int interactionsToTheLeft = 0;
+	int interactionsToTheRight = 0;
+	int y = p.getY();
+	for(int i = 0; i < p.getX(); i++) {
+		if(bitmap[i][y] == color)
+			interactionsToTheLeft++;
+	}
+	for(int i = p.getY(); i < IMAGE_WIDTH; i++) {
+		if(bitmap[i][y] == color)
+			interactionsToTheRight++;
+	}
+	if((interactionsToTheLeft %2 != 0) && (interactionsToTheRight %2 != 0)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void sweepFill() {
