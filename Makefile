@@ -1,4 +1,4 @@
-goal: draco visualizer git
+goal: draco visualizer
 
 draco:
 	g++ -g -o draco draco.cpp
