@@ -328,6 +328,8 @@ void decompress(char * inputFile, char * outputFile) {
 	readCompressedFile(in);
 	fclose(in);
 
+	sweepFill();
+
 	FILE * out = fopen(outputFile, "w");
 	writeUnCompressedFile(out);
 	fclose(out);
