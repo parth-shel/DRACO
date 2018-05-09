@@ -37,6 +37,7 @@ draco-visualizer
 *.log
 
 # Test Files
+./compress_test_cases
 test*
 *.DRACO
 *.PIC
