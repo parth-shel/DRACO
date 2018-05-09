@@ -36,5 +36,10 @@ draco-visualizer
 # Log Files
 *.log
 
+# Test Files
+test*
+*.DRACO
+*.PIC
+
 # Swap Files
 *.swp
