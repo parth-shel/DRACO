@@ -307,6 +307,7 @@ void sweepFill() {
 	
 		std::vector<Pixel> mask;
 		int blockColor = *itr;
+		
 		for(int i = 0; i < IMAGE_WIDTH; i++) {
 			for(int j = 0; j < IMAGE_WIDTH; j++) {
 				Pixel thisPixel = Pixel(i, j);
